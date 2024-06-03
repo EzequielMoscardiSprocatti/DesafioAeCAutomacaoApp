@@ -15,16 +15,20 @@ namespace DesafioAeCAutomacaoApp.UI.Views
 {
     public partial class FrmBotAlura : Form
     {
-        private readonly CursoAluraServicos _cursoServico;
+
+        private CursoAluraServicos _cursoServico;
 
         public FrmBotAlura()
         {
             InitializeComponent();
-            _cursoServico = new CursoAluraServicos();
+            
         }  
 
         private async void BtnConsultar_Click(object sender, EventArgs e)
         {
+             _cursoServico = new  CursoAluraServicos();
+
+
             var ret = await _cursoServico.ConsultarCursos(txtCampoTermo.Text);
             CarregaDgv();
         }
@@ -39,6 +43,7 @@ namespace DesafioAeCAutomacaoApp.UI.Views
         /// </summary>
         private void CarregaDgv()
         {
+             _cursoServico = new CursoAluraServicos();
             CursoResultado curso = new CursoResultado();
             List<CursoResultado> ListaCuros = new List<CursoResultado>();
 
