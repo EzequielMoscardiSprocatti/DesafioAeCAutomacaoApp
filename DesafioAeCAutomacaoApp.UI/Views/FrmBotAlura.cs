@@ -15,31 +15,35 @@ namespace DesafioAeCAutomacaoApp.UI.Views
 {
     public partial class FrmBotAlura : Form
     {
-        private readonly CursoAluraServicos _cursoServico;
+
+        private CursoAluraServicos _cursoServico;
 
         public FrmBotAlura()
         {
             InitializeComponent();
-            _cursoServico = new CursoAluraServicos();
+            
         }  
 
         private async void BtnConsultar_Click(object sender, EventArgs e)
         {
+             _cursoServico = new  CursoAluraServicos();
+
             var ret = await _cursoServico.ConsultarCursos(txtCampoTermo.Text);
-            CarregaDgv();
+            CarregaDgv(_cursoServico);
         }
 
         private void BtnDgv_Click(object sender, EventArgs e)
         {
-            CarregaDgv();
+            _cursoServico = new CursoAluraServicos();
+            CarregaDgv(_cursoServico);
         }
 
         /// <summary>
         /// Preenche os dados do banco no datagridview para exporta.
         /// </summary>
-        private void CarregaDgv()
+        private void CarregaDgv(CursoAluraServicos _cursoServico)
         {
-            CursoResultado curso = new CursoResultado();
+
             List<CursoResultado> ListaCuros = new List<CursoResultado>();
 
             var cursos = _cursoServico.ObterTodosCursos();

@@ -14,11 +14,8 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
     public class ConsultarCurso(IWebDriver driver)
     {
         private int LimiteUrls;
-        public IWebDriver driver { get; set; }
-        public ConsultarCurso(IWebDriver driver)
-        {
-            this.driver = driver;
-        }
+        public IWebDriver driver { get; set; } = driver;
+        
 
         /// <summary>
         /// Busca URL's e armazena numa lista.
