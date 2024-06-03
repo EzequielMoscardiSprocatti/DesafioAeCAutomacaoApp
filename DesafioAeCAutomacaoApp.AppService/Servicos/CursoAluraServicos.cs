@@ -23,6 +23,7 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
             _cursoServico = new CursoResultadoJsonRepository();            
             _driver = new WebDriverConfig();
             _botAlura = new ConsultarCurso(_driver.GetWebDriver());
+
         }
 
         /// <summary>
@@ -68,8 +69,6 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
         /// <returns></returns>
         public async Task<bool> ConsultarCursos(string termopesquisa)
         {
-            IWebDriver driver = _driver.GetWebDriver();
-
             IList<CursoResultado> cursos = new List<CursoResultado>();
 
             cursos = await _botAlura.CapturarUrlCurso(termopesquisa);

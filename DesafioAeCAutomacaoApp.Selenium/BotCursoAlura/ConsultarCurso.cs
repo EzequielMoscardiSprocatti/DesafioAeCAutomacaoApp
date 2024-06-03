@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
 {
-    public class ConsultarCurso
+    public class ConsultarCurso(IWebDriver driver)
     {
         private int LimiteUrls;
         public IWebDriver driver { get; set; }
@@ -343,6 +343,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// </summary>
         /// <param name="driver"></param>
         private void PageLoadDirver()
+
         {
             int timeoutInSeconds = 10;
 
