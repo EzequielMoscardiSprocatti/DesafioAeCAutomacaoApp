@@ -20,9 +20,10 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
 
         public CursoAluraServicos()
         {
-            _cursoServico = new CursoResultadoJsonRepository();
-            _botAlura = new ConsultarCurso();
             _driver = new WebDriverConfig();
+            _cursoServico = new CursoResultadoJsonRepository();
+            _botAlura = new ConsultarCurso(_driver.GetWebDriver());
+            
         }
 
         /// <summary>
@@ -68,15 +69,13 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
         /// <returns></returns>
         public async Task<bool> ConsultarCursos(string termopesquisa)
         {
-            IWebDriver driver = _driver.GetWebDriver();
-
             IList<CursoResultado> cursos = new List<CursoResultado>();
 
-            cursos = await _botAlura.CapturarUrlCurso(driver, termopesquisa);
+            cursos = await _botAlura.CapturarUrlCurso(termopesquisa);
 
             foreach(var curso in cursos)
             {
-                _cursoServico.Add(await _botAlura.DadosCurso(driver, curso));
+                _cursoServico.Add(await _botAlura.DadosCurso(curso));
             }
 
             return true;

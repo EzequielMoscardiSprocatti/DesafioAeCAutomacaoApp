@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
 {
-    public class ConsultarCurso
+    public class ConsultarCurso(IWebDriver driver)
     {
         private int LimiteUrls;
 
@@ -21,7 +21,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="termocurso"></param>
         /// <returns></returns>
-        public async Task<IList<UrlCursos>> UrlCursos(IWebDriver driver, string termocurso)
+        public async Task<IList<UrlCursos>> UrlCursos(string termocurso)
         {
             IList<UrlCursos> urlCursos = new List<UrlCursos>();
             UrlCursos curso = null;
@@ -96,7 +96,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="termocurso"></param>
         /// <returns></returns>
-        public async Task<IList<CursoResultado>> CapturarUrlCurso(IWebDriver driver, string termocurso)
+        public async Task<IList<CursoResultado>> CapturarUrlCurso(string termocurso)
         {
             IList<CursoResultado> cursosLista = new List<CursoResultado>();
             UrlCursos curso = null;
@@ -181,7 +181,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="curso"></param>
         /// <returns></returns>
-        public async Task<CursoResultado> DadosCurso(IWebDriver driver, CursoResultado curso)
+        public async Task<CursoResultado> DadosCurso(CursoResultado curso)
         {
             await AcessarUrl(driver, curso.UrlCurso);
 
@@ -325,7 +325,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        private async Task AcessarUrl(IWebDriver driver, string url)
+        private async Task AcessarUrl(string url)
         {          
             driver.Navigate().GoToUrl(url);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
@@ -337,7 +337,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// Aguarde a página carregar por completo
         /// </summary>
         /// <param name="driver"></param>
-        private static void PageLoadDirver(IWebDriver driver)
+        private static void PageLoadDirver()
         {
             int timeoutInSeconds = 10;
 
