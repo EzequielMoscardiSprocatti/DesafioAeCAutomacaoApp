@@ -46,9 +46,12 @@ DDD com Injeção de Dependência: Para manter a separação de responsabilidade
 
 Repositório JSON: Para simplificar o armazenamento de dados sem necessidade de instalar um banco de dados completo.
 
-**Fluxo da Aplicação**
+## **Fluxo da Aplicação**
 
 ![BotAlura](https://github.com/EzequielMoscardiSprocatti/DesafioAeCAutomacaoApp/assets/19784186/2647b830-1512-4ace-ab66-c3763f398140)
+
+
+![BotAluraAtualizado](https://github.com/EzequielMoscardiSprocatti/DesafioAeCAutomacaoApp/assets/19784186/c89f28be-28c5-4681-90be-8de453678312)
 
 
 O usuário interage com o formulário Windows Forms.
@@ -60,19 +63,19 @@ A camada de aplicação utiliza o Selenium para realizar a busca no site da Alur
 
 Os dados coletados são salvos no repositório (arquivo JSON).
 
-**Tratamento de Erros**
+## **Tratamento de Erros**
 
 Implementação de try-catch blocks nas operações críticas.
 
 Mensagens de erro amigáveis para o usuário em caso de falhas.
 
-**Uso de WebDriver**
+## **Uso de WebDriver**
 
 O projeto utiliza ChromeDriver para interagir com o navegador Google Chrome.
 
 A execução é configurada para exibir a interface gráfica para melhor entendimento do processo.
 
-**Uso do GitFlow**
+## **Uso do GitFlow**
 
 Branches de feature, develop e main são utilizadas para organizar o desenvolvimento.
 
