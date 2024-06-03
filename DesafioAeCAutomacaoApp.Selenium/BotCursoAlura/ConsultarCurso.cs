@@ -14,6 +14,11 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
     public class ConsultarCurso(IWebDriver driver)
     {
         private int LimiteUrls;
+        public IWebDriver driver { get; set; }
+        public ConsultarCurso(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
 
         /// <summary>
         /// Busca URL's e armazena numa lista.
@@ -29,17 +34,17 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
 
             IWebElement cpCampoBusca = null, Paginacao = null;
             string urlprincipal = "";
-            await AcessarUrl(driver, "https://www.alura.com.br/");
+            await AcessarUrl("https://www.alura.com.br/");
 
             try
             {
                 cpCampoBusca = driver.FindElement(By.Id("header-barraBusca-form-campoBusca"));
                 cpCampoBusca.SendKeys(termocurso);
                 cpCampoBusca.Submit();
-                PageLoadDirver(driver);
+                PageLoadDirver();
 
                 urlprincipal = driver.Url+ "&typeFilters=COURSE";
-                await AcessarUrl(driver, urlprincipal);
+                await AcessarUrl(urlprincipal);
             }
             catch (Exception)
             {
@@ -103,7 +108,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
             bool proxPg = true;
             IWebElement cpCampoBusca = null, Paginacao = null;
             string urlprincipal = "";
-            await AcessarUrl(driver, "https://www.alura.com.br/");
+            await AcessarUrl("https://www.alura.com.br/");
 
             LimiteUrls = 0;
 
@@ -112,7 +117,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
                 cpCampoBusca = driver.FindElement(By.Id("header-barraBusca-form-campoBusca"));
                 cpCampoBusca.SendKeys(termocurso);
                 cpCampoBusca.Submit();
-                PageLoadDirver(driver);
+                PageLoadDirver();
 
                 //urlprincipal = driver.Url + "&typeFilters=COURSE";
                 //await AcessarUrl(driver, urlprincipal);
@@ -183,7 +188,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <returns></returns>
         public async Task<CursoResultado> DadosCurso(CursoResultado curso)
         {
-            await AcessarUrl(driver, curso.UrlCurso);
+            await AcessarUrl(curso.UrlCurso);
 
             string urlsite = driver.Url;
 
@@ -330,14 +335,15 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
             driver.Navigate().GoToUrl(url);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             System.Threading.Thread.Sleep(2000);
-            PageLoadDirver(driver);
+            PageLoadDirver();
         }
 
         /// <summary>
         /// Aguarde a página carregar por completo
         /// </summary>
         /// <param name="driver"></param>
-        private static void PageLoadDirver()
+        private void PageLoadDirver()
+
         {
             int timeoutInSeconds = 10;
 

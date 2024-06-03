@@ -20,10 +20,10 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
 
         public CursoAluraServicos()
         {
+            _cursoServico = new CursoResultadoJsonRepository();            
             _driver = new WebDriverConfig();
-            _cursoServico = new CursoResultadoJsonRepository();
             _botAlura = new ConsultarCurso(_driver.GetWebDriver());
-            
+
         }
 
         /// <summary>
