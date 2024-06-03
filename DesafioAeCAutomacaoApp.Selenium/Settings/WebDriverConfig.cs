@@ -12,6 +12,8 @@ namespace DesafioAeCAutomacaoApp.Selenium.Settings
     public class WebDriverConfig
     {
         private IWebDriver _driver;
+        
+        //Caso não exista uma pasta com o chromedriver, será usado o chromeDriver do Nuget
         private string _path = "C:\\Driver\\chromiun\\chromedriver.exe";
 
         /// <summary>
