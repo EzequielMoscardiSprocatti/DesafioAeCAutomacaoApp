@@ -70,7 +70,7 @@ Mensagens de erro amigáveis para o usuário em caso de falhas.
 
 O projeto utiliza ChromeDriver para interagir com o navegador Google Chrome.
 
-A execução é configurada para ser headless (sem interface gráfica) para melhor performance.
+A execução é configurada para exibir a interface gráfica para melhor entendimento do processo.
 
 **Uso do GitFlow**
 
