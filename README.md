@@ -1,3 +1,4 @@
+
 # Desafio AeC Automação
 
 ## Sobre o desafio.
@@ -80,3 +81,5 @@ A execução é configurada para exibir a interface gráfica para melhor entendi
 Branches de feature, develop e main são utilizadas para organizar o desenvolvimento.
 
 Pull requests e code reviews são realizados antes de merges importantes.
+=======
+
