@@ -11,9 +11,11 @@ using System.Threading.Tasks;
 
 namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
 {
-    public class ConsultarCurso
+    public class ConsultarCurso(IWebDriver driver)
     {
         private int LimiteUrls;
+        public IWebDriver driver { get; set; } = driver;
+        
 
         /// <summary>
         /// Busca URL's e armazena numa lista.
@@ -21,7 +23,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="termocurso"></param>
         /// <returns></returns>
-        public async Task<IList<UrlCursos>> UrlCursos(IWebDriver driver, string termocurso)
+        public async Task<IList<UrlCursos>> UrlCursos(string termocurso)
         {
             IList<UrlCursos> urlCursos = new List<UrlCursos>();
             UrlCursos curso = null;
@@ -29,17 +31,17 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
 
             IWebElement cpCampoBusca = null, Paginacao = null;
             string urlprincipal = "";
-            await AcessarUrl(driver, "https://www.alura.com.br/");
+            await AcessarUrl("https://www.alura.com.br/");
 
             try
             {
                 cpCampoBusca = driver.FindElement(By.Id("header-barraBusca-form-campoBusca"));
                 cpCampoBusca.SendKeys(termocurso);
                 cpCampoBusca.Submit();
-                PageLoadDirver(driver);
+                PageLoadDirver();
 
                 urlprincipal = driver.Url+ "&typeFilters=COURSE";
-                await AcessarUrl(driver, urlprincipal);
+                await AcessarUrl(urlprincipal);
             }
             catch (Exception)
             {
@@ -96,14 +98,14 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="termocurso"></param>
         /// <returns></returns>
-        public async Task<IList<CursoResultado>> CapturarUrlCurso(IWebDriver driver, string termocurso)
+        public async Task<IList<CursoResultado>> CapturarUrlCurso(string termocurso)
         {
             IList<CursoResultado> cursosLista = new List<CursoResultado>();
             UrlCursos curso = null;
             bool proxPg = true;
             IWebElement cpCampoBusca = null, Paginacao = null;
             string urlprincipal = "";
-            await AcessarUrl(driver, "https://www.alura.com.br/");
+            await AcessarUrl("https://www.alura.com.br/");
 
             LimiteUrls = 0;
 
@@ -112,7 +114,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
                 cpCampoBusca = driver.FindElement(By.Id("header-barraBusca-form-campoBusca"));
                 cpCampoBusca.SendKeys(termocurso);
                 cpCampoBusca.Submit();
-                PageLoadDirver(driver);
+                PageLoadDirver();
 
                 //urlprincipal = driver.Url + "&typeFilters=COURSE";
                 //await AcessarUrl(driver, urlprincipal);
@@ -181,9 +183,9 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="curso"></param>
         /// <returns></returns>
-        public async Task<CursoResultado> DadosCurso(IWebDriver driver, CursoResultado curso)
+        public async Task<CursoResultado> DadosCurso(CursoResultado curso)
         {
-            await AcessarUrl(driver, curso.UrlCurso);
+            await AcessarUrl(curso.UrlCurso);
 
             string urlsite = driver.Url;
 
@@ -325,19 +327,20 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
         /// <param name="driver"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        private async Task AcessarUrl(IWebDriver driver, string url)
+        private async Task AcessarUrl(string url)
         {          
             driver.Navigate().GoToUrl(url);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             System.Threading.Thread.Sleep(2000);
-            PageLoadDirver(driver);
+            PageLoadDirver();
         }
 
         /// <summary>
         /// Aguarde a página carregar por completo
         /// </summary>
         /// <param name="driver"></param>
-        private static void PageLoadDirver(IWebDriver driver)
+        private void PageLoadDirver()
+
         {
             int timeoutInSeconds = 10;
 

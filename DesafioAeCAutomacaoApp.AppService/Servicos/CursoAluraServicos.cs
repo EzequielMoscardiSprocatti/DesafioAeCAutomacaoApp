@@ -15,14 +15,10 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
     public class CursoAluraServicos
     {
         private readonly CursoResultadoJsonRepository _cursoServico;
-        private readonly ConsultarCurso _botAlura;
-        private readonly WebDriverConfig _driver;
 
         public CursoAluraServicos()
         {
-            _cursoServico = new CursoResultadoJsonRepository();
-            _botAlura = new ConsultarCurso();
-            _driver = new WebDriverConfig();
+            _cursoServico = new CursoResultadoJsonRepository(); 
         }
 
         /// <summary>
@@ -61,25 +57,6 @@ namespace DesafioAeCAutomacaoApp.AppService.Servicos
             return _cursoServico.Get(id);
         }
 
-        /// <summary>
-        /// Função para consultar os dados de curso no site da Alura, e armazena no banco de dados local.
-        /// </summary>
-        /// <param name="termopesquisa"></param>
-        /// <returns></returns>
-        public async Task<bool> ConsultarCursos(string termopesquisa)
-        {
-            IWebDriver driver = _driver.GetWebDriver();
-
-            IList<CursoResultado> cursos = new List<CursoResultado>();
-
-            cursos = await _botAlura.CapturarUrlCurso(driver, termopesquisa);
-
-            foreach(var curso in cursos)
-            {
-                _cursoServico.Add(await _botAlura.DadosCurso(driver, curso));
-            }
-
-            return true;
-        }
+ 
     }
 }

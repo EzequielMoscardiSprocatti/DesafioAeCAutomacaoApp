@@ -1,4 +1,5 @@
-﻿using DesafioAeCAutomacaoApp.AppService.Servicos;
+﻿using DesafioAeCAutomacaoApp.AppService.BotAlura;
+using DesafioAeCAutomacaoApp.AppService.Servicos;
 using DesafioAeCAutomacaoApp.Domain.Entities;
 using Newtonsoft.Json;
 using System;
@@ -15,31 +16,34 @@ namespace DesafioAeCAutomacaoApp.UI.Views
 {
     public partial class FrmBotAlura : Form
     {
-        private readonly CursoAluraServicos _cursoServico;
+
+        private CursoAluraServicos _cursoServico;
+        private BotAluraCursos _botAluraCursos;
 
         public FrmBotAlura()
         {
-            InitializeComponent();
-            _cursoServico = new CursoAluraServicos();
+            InitializeComponent();            
         }  
 
         private async void BtnConsultar_Click(object sender, EventArgs e)
         {
-            var ret = await _cursoServico.ConsultarCursos(txtCampoTermo.Text);
-            CarregaDgv();
+            _botAluraCursos = new BotAluraCursos();
+            var ret = await _botAluraCursos.ConsultarCursos(txtCampoTermo.Text);
+            CarregaDgv(_cursoServico);
         }
 
         private void BtnDgv_Click(object sender, EventArgs e)
         {
-            CarregaDgv();
+            _cursoServico = new CursoAluraServicos();
+            CarregaDgv(_cursoServico);
         }
 
         /// <summary>
         /// Preenche os dados do banco no datagridview para exporta.
         /// </summary>
-        private void CarregaDgv()
+        private void CarregaDgv(CursoAluraServicos _cursoServico)
         {
-            CursoResultado curso = new CursoResultado();
+
             List<CursoResultado> ListaCuros = new List<CursoResultado>();
 
             var cursos = _cursoServico.ObterTodosCursos();
