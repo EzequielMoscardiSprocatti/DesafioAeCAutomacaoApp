@@ -1,4 +1,5 @@
-﻿using DesafioAeCAutomacaoApp.AppService.Servicos;
+﻿using DesafioAeCAutomacaoApp.AppService.BotAlura;
+using DesafioAeCAutomacaoApp.AppService.Servicos;
 using DesafioAeCAutomacaoApp.Domain.Entities;
 using Newtonsoft.Json;
 using System;
@@ -17,18 +18,17 @@ namespace DesafioAeCAutomacaoApp.UI.Views
     {
 
         private CursoAluraServicos _cursoServico;
+        private BotAluraCursos _botAluraCursos;
 
         public FrmBotAlura()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
         }  
 
         private async void BtnConsultar_Click(object sender, EventArgs e)
         {
-             _cursoServico = new  CursoAluraServicos();
-
-            var ret = await _cursoServico.ConsultarCursos(txtCampoTermo.Text);
+            _botAluraCursos = new BotAluraCursos();
+            var ret = await _botAluraCursos.ConsultarCursos(txtCampoTermo.Text);
             CarregaDgv(_cursoServico);
         }
 
