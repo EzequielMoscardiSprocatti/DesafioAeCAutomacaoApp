@@ -40,7 +40,7 @@ namespace DesafioAeCAutomacaoApp.Selenium.BotCursoAlura
                 cpCampoBusca.Submit();
                 PageLoadDirver();
 
-                urlprincipal = driver.Url+ "&typeFilters=COURSE";
+                //urlprincipal = driver.Url+ "&typeFilters=COURSE";
                 await AcessarUrl(urlprincipal);
             }
             catch (Exception)
